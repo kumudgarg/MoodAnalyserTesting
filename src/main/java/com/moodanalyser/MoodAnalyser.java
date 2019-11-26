@@ -11,9 +11,11 @@ public class MoodAnalyser {
         this.message = message;
     }
 
+    public String moodAnalyser(String message) throws MoodAnalyserException {
+        this.message=message;
+        return analyseMood();
 
-
-
+    }
     public String analyseMood() throws MoodAnalyserException {
         try {
             if(message.length() == 0)
@@ -24,6 +26,13 @@ public class MoodAnalyser {
         } catch (NullPointerException e) {
             throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_NULL,"please enter not null mood");
         }
+    }
+
+    public boolean equals(Object another) {
+        if(this == another) {
+            return true;
+        }
+        return false;
     }
 }
 

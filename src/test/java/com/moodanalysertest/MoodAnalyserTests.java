@@ -2,6 +2,7 @@ package com.moodanalysertest;
 
 import com.moodanalyser.MoodAnalyser;
 import com.moodanalyser.MoodAnalyserException;
+import com.moodanalyser.MoodAnalyserFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -63,6 +64,14 @@ public class MoodAnalyserTests {
         } catch (MoodAnalyserException e) {
             Assert.assertEquals("please enter non empty mood",e.getMessage());
         }
+    }
+
+
+    @Test
+    public void givenMoodAnalyserEqulasMethod_WhenProper_ShouldReturnTrue() throws NoSuchMethodException {
+        MoodAnalyser moodAnalyser = MoodAnalyserFactory.createMoodAnalyser();
+        boolean mood = moodAnalyser.equals(new MoodAnalyser());
+        Assert.assertEquals(false,mood);
     }
 
 }
