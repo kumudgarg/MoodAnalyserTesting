@@ -44,13 +44,24 @@ public class MoodAnalyserTests {
     }
 
     @Test
-    public void givenMesage_WhenNull_ShouldReturnException() {
+    public void givenMesage_WhenNull_ShouldReturnNullException() {
         MoodAnalyser moodAnalyser = new MoodAnalyser(null);
         String mood = null;
         try {
             mood = moodAnalyser.analyseMood();
         } catch (MoodAnalyserException e) {
-            Assert.assertEquals("please enter proper mood message",e.getMessage());
+            Assert.assertEquals("please enter not null mood",e.getMessage());
+        }
+    }
+
+    @Test
+    public void givenMesage_WhenEmpty_ShouldReturnEmptyException() {
+        MoodAnalyser moodAnalyser = new MoodAnalyser("");
+        String mood = "";
+        try {
+            mood = moodAnalyser.analyseMood();
+        } catch (MoodAnalyserException e) {
+            Assert.assertEquals("please enter non empty mood",e.getMessage());
         }
     }
 
