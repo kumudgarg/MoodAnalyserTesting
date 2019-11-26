@@ -20,6 +20,22 @@ public class MoodAnalyserFactory {
             e.printStackTrace();
         }
         return null;
+    } public static MoodAnalyser createMoodAnalyserNoSuchClass() throws MoodAnalyserException {
+        try {
+            Class<?> moodAnalyserClass = Class.forName("com.moodanalyser.MoodAnalysis");
+            Constructor<?> moodConstructor = moodAnalyserClass.getConstructor();
+            Object moodObj = moodConstructor.newInstance();
+            return (MoodAnalyser) moodObj;
+        } catch (ClassNotFoundException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_CLASS_ERROR,"NO_SUCH_CLASS_ERROR");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
 
