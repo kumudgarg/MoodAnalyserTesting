@@ -75,12 +75,22 @@ public class MoodAnalyserTests {
     }
 
     @Test
-    public void givenMoodAnalyserClassNotFound_WhenProper_ShouldReturnequlas() throws NoSuchMethodException {
+    public void givenMoodAnalyserClassNotFound_WhenNotFound_ShouldReturnExceptionType() throws NoSuchMethodException {
         MoodAnalyser moodAnalyser = null;
         try {
              moodAnalyser = MoodAnalyserFactory.createMoodAnalyserNoSuchClass();
         } catch (MoodAnalyserException e) {
             Assert.assertEquals("NO_SUCH_CLASS_ERROR",e.getMessage());
+        }
+
+    }
+    @Test
+    public void givenMoodAnalyserMethodNotFound_WhenNotFound_ShouldReturnExceptionType() throws NoSuchMethodException {
+        MoodAnalyser moodAnalyser = null;
+        try {
+             moodAnalyser = MoodAnalyserFactory.createMoodAnalyserNoSuchClass();
+        } catch (MoodAnalyserException e) {
+            Assert.assertEquals("NO_SUCH_METHOD_ERROR",e.getMessage());
         }
 
     }
