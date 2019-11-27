@@ -114,4 +114,15 @@ public class MoodAnalyserTests {
 
     }
 
+    @Test
+    public void givenMoodAnalyserClassNotFoundForParameterConstructor_WhenNotFound_ShouldReturnExceptionType() throws NoSuchMethodException {
+        MoodAnalyser moodAnalyser = null;
+        try {
+            moodAnalyser = MoodAnalyserFactory.createMoodAnalyserExceptionThrows("I am in Happy mood");
+        } catch (MoodAnalyserException e) {
+            Assert.assertEquals("Class name is Improper",e.getMessage());
+        }
+
+    }
+
 }

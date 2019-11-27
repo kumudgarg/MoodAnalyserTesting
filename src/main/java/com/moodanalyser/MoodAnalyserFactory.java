@@ -59,5 +59,24 @@ public class MoodAnalyserFactory {
             throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.METHOD_INVOCATION_ISSUE, "Target invoke problem");
         }
     }
+
+    public static MoodAnalyser createMoodAnalyserExceptionThrows(String message) throws MoodAnalyserException {
+        try {
+            Class<?> moodAnalyserClass = Class.forName("com.moodanalyser.MoodAnalysis");
+            Constructor<?> moodConstructor = moodAnalyserClass.getConstructor(String.class);
+            Object moodObj = moodConstructor.newInstance(message);
+            return (MoodAnalyser) moodObj;
+        } catch (ClassNotFoundException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_CLASS, "Class name is Improper");
+        } catch (IllegalAccessException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_ACCESS, "Class member accesss not Allowed");
+        } catch (InstantiationException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.OBJECT_CREATED_ISSUE, "Instantiation Issue");
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD, "Method Not Found");
+        } catch (InvocationTargetException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.METHOD_INVOCATION_ISSUE, "Target invoke problem");
+        }
+    }
 }
 
