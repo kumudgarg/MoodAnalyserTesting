@@ -125,4 +125,16 @@ public class MoodAnalyserTests {
 
     }
 
+    @Test
+    public void givenMoodAnalyserMethodNotFoundForParameterConstructor_WhenNotFound_ShouldReturnExceptionType() throws NoSuchMethodException {
+        MoodAnalyser moodAnalyser = null;
+        try {
+            moodAnalyser = MoodAnalyserFactory.createMoodAnalyserExceptionThrows("I am in Happy mood");
+        } catch (MoodAnalyserException e) {
+            Assert.assertEquals("Method Not Found",e.getMessage());
+        }
+
+    }
+
+
 }
