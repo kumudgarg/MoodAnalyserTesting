@@ -147,5 +147,15 @@ public class MoodAnalyserTests {
         }
     }
 
+    @Test
+    public void givenHappyMessageWithWrongMethodName_WithReflection_ShouldReturnRespectiveException() {
+        try {
+            Object myObject = MoodAnalyserFactory.createMoodAnalyser("I am in Happy Mood");
+            Object mood = MoodAnalyserFactory.invokeMethod(myObject, "analysisMood");
+        } catch (MoodAnalyserException e) {
+            Assert.assertEquals("Define proper Method Name",e.getMessage());
+        }
+    }
+
 
 }
