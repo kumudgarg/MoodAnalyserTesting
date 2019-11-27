@@ -69,9 +69,15 @@ public class MoodAnalyserTests {
 
     @Test
     public void givenMoodAnalyserEqulasMethod_WhenProper_ShouldReturnTrue() throws NoSuchMethodException {
-        MoodAnalyser moodAnalyser = MoodAnalyserFactory.createMoodAnalyser();
-        boolean mood = moodAnalyser.equals(new MoodAnalyser());
-        Assert.assertEquals(false,mood);
+        MoodAnalyser moodAnalyser = null;
+        try {
+            moodAnalyser = MoodAnalyserFactory.createMoodAnalyser();
+            boolean mood = moodAnalyser.equals(new MoodAnalyser());
+            Assert.assertEquals(false,mood);
+        } catch (MoodAnalyserException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Test
@@ -91,6 +97,19 @@ public class MoodAnalyserTests {
              moodAnalyser = MoodAnalyserFactory.createMoodAnalyserNoSuchClass();
         } catch (MoodAnalyserException e) {
             Assert.assertEquals("NO_SUCH_METHOD_ERROR",e.getMessage());
+        }
+
+    }
+
+    @Test
+    public void givenMoodAnalyserEqulasMethodForParameterizedConstructor_WhenProper_ShouldReturnTrue() throws NoSuchMethodException {
+        MoodAnalyser moodAnalyser = null;
+        try {
+            moodAnalyser = MoodAnalyserFactory.createMoodAnalyser("I am in Happy mood");
+            boolean mood = moodAnalyser.equals(new MoodAnalyser());
+            Assert.assertEquals(false,mood);
+        } catch (MoodAnalyserException e) {
+            e.printStackTrace();
         }
 
     }

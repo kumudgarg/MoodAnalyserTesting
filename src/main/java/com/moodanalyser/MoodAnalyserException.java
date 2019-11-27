@@ -3,7 +3,8 @@ package com.moodanalyser;
 public class MoodAnalyserException extends Exception{
 
     enum ExceptionType {
-        ENTERED_NULL, ENTERED_EMPTY,NO_SUCH_CLASS_ERROR,NO_SUCH_CLASS_METHOD_ERROR;
+        ENTERED_NULL, ENTERED_EMPTY, NO_SUCH_CLASS, NO_SUCH_METHOD, NO_SUCH_FIELD,
+        FIELD_SETTING_ISSUE,NO_ACCESS,OBJECT_CREATED_ISSUE,METHOD_INVOCATION_ISSUE;
     }
     ExceptionType type;
 
@@ -16,4 +17,8 @@ public class MoodAnalyserException extends Exception{
         this.type = type;
     }
 
+    public MoodAnalyserException(ExceptionType type, String message, Throwable cause) {
+        super(message, cause);
+        this.type = type;
+    }
 }

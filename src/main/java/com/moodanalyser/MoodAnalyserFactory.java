@@ -4,40 +4,60 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyserFactory {
-    public static MoodAnalyser createMoodAnalyser() {
+    public static MoodAnalyser createMoodAnalyser() throws MoodAnalyserException {
         try {
             Class<?> moodAnalyserClass = Class.forName("com.moodanalyser.MoodAnalyser");
             Constructor<?> moodConstructor = moodAnalyserClass.getConstructor();
             Object moodObj = moodConstructor.newInstance();
             return (MoodAnalyser) moodObj;
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_CLASS,"Class name is Improper");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_ACCESS,"Class member accesss not Allowed");
         } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException | NoSuchMethodException e) {
-            e.printStackTrace();
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.OBJECT_CREATED_ISSUE,"Instantiation Issue");
+        } catch (InvocationTargetException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.METHOD_INVOCATION_ISSUE,"Target invoke problem");
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD,"Method Not Found");
         }
-        return null;
-    } public static MoodAnalyser createMoodAnalyserNoSuchClass() throws MoodAnalyserException {
+    }
+    public static MoodAnalyser createMoodAnalyserNoSuchClass() throws MoodAnalyserException {
         try {
             Class<?> moodAnalyserClass = Class.forName("com.moodanalyser.MoodAnalyser");
             Constructor<?> moodConstructor = moodAnalyserClass.getConstructor(Integer.class);
             Object moodObj = moodConstructor.newInstance();
             return (MoodAnalyser) moodObj;
         } catch (ClassNotFoundException e) {
-            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_CLASS_ERROR,"NO_SUCH_CLASS_ERROR");
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_CLASS,"Class name is Improper");
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_ACCESS,"Class member accesss not Allowed");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.OBJECT_CREATED_ISSUE,"Instantiation Issue");
         } catch (NoSuchMethodException e) {
-            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_CLASS_METHOD_ERROR,"NO_SUCH_METHOD_ERROR");
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD,"Method Not Found");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.METHOD_INVOCATION_ISSUE,"Target invoke problem");
         }
-        return null;
+    }
+
+    public static MoodAnalyser createMoodAnalyser(String message) throws MoodAnalyserException {
+        try {
+            Class<?> moodAnalyserClass = Class.forName("com.moodanalyser.MoodAnalyser");
+            Constructor<?> moodConstructor = moodAnalyserClass.getConstructor(String.class);
+            Object moodObj = moodConstructor.newInstance(message);
+            return (MoodAnalyser) moodObj;
+        } catch (ClassNotFoundException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_CLASS, "Class name is Improper");
+        } catch (IllegalAccessException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_ACCESS, "Class member accesss not Allowed");
+        } catch (InstantiationException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.OBJECT_CREATED_ISSUE, "Instantiation Issue");
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD, "Method Not Found");
+        } catch (InvocationTargetException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.METHOD_INVOCATION_ISSUE, "Target invoke problem");
+        }
     }
 }
 
