@@ -78,5 +78,18 @@ public class MoodAnalyserFactory {
             throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.METHOD_INVOCATION_ISSUE, "Target invoke problem");
         }
     }
+
+    public static Object invokeMethod(Object moodAnalyserObject, String methodName) throws MoodAnalyserException {
+        try {
+            return moodAnalyserObject.getClass().getMethod(methodName).invoke(moodAnalyserObject);
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD,"Define proper Method Name");
+        } catch (InvocationTargetException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.METHOD_INVOCATION_ISSUE,"May be Issue With Data Entered",e);
+        } catch (IllegalAccessException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_ACCESS,"Field cannot be accessed");
+        }
+
+    }
 }
 
